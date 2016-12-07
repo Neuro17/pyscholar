@@ -87,3 +87,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+Custon
+beautiful_soup_example.py
+.idea
