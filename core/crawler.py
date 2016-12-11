@@ -21,6 +21,7 @@ class Crawler:
         self._query = query.build()
         self._parser = Parser()
         self._logger = logging.getLogger(__name__)
+        self.articles = []
         logging.basicConfig(level=log_level)
 
     def _get_next_page_url(self, next_page):
@@ -34,7 +35,7 @@ class Crawler:
             request = urllib2.Request(query, None, self._headers)
             page = BeautifulSoup(self._opener.open(request).read(), 'lxml')
 
-            self._parser.parse(page)
+            self.articles += self._parser.parse(page)
 
             next_page = page.select('div#gs_n center table tr td')[-1:][0] \
                 .select('a')[0].get('href')
@@ -46,6 +47,12 @@ class Crawler:
 
 if __name__ == '__main__':
     from query import Query
-    q = Query(authors='page')
-    c = Crawler(q, pages=2)
+    import pprint as pp
+    q = Query(words='mesos')
+    print q.build()
+    c = Crawler(q, pages=1)
     c.explore_pages()
+    for art in c.articles[:1]:
+        # print art
+        art.year = '2016'
+        pp.pprint( art.to_dict())
