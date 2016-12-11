@@ -16,6 +16,7 @@ class Query:
         self.words_none = words_none
         self.citations = citations
         self._query = None
+        self.language = 'en'
 
     def _quote(self):
         for attr in [a for a in vars(q) if not a.startswith('_')]:
@@ -31,7 +32,8 @@ class Query:
                        'as_sauthors': self.authors,
                        'as_oq': self.words_some,
                        'as_eq': self.words_none,
-                       'as_vis': self.citations}
+                       'as_vis': self.citations,
+                       'hl': self.language}
         return utils.SCHOLAR_SITE + '/scholar?' + urlencode(self._query)
 
 if __name__ == '__main__':
