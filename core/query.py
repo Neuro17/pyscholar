@@ -19,7 +19,7 @@ class Query:
         self.language = 'en'
 
     def _quote(self):
-        for attr in [a for a in vars(q) if not a.startswith('_')]:
+        for attr in [a for a in vars(self) if not a.startswith('_')]:
             attr_value = getattr(self, attr)
             if isinstance(attr_value, list):
                 setattr(self, attr, ' '.join(attr_value))
