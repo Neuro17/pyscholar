@@ -10,6 +10,8 @@ from urllib import urlencode
 SCHOLAR_SITE = 'https://scholar.google.it'
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) ' \
              'Gecko/2009021910 Firefox/3.0.7'
+ACCEPT = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+
 MAX_PAGES = 1
 
 class Query:
@@ -131,7 +133,7 @@ class Crawler:
         ]
         self._opener = urllib2.build_opener(*self._handlers)
         self.pages = pages or MAX_PAGES
-        self._headers = {'User-Agent': USER_AGENT}
+        self._headers = {'User-Agent': USER_AGENT, 'Accept': ACCEPT}
         self._query = query.build()
         self._parser = Parser()
         self._logger = logging.getLogger(__name__)
