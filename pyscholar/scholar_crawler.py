@@ -9,7 +9,7 @@ USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) ' \
 WEB_ROOT = 'https://scholar.google.it'
 SCHOLAR = 'scholar'
 LANGUAGE = 'en'
-QUERY = 'foundations of technical analysis'
+QUERY = 'mapreduce'
 
 params = {'hl': LANGUAGE,
           'q': urllib.quote_plus(QUERY)}
