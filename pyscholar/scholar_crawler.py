@@ -79,7 +79,7 @@ def parse_scholar_record(record):
         print '#' * 80
         print
 
-        
+
 def get_url(params):
     return WEB_ROOT + params
 

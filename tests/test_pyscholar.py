@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from core.query import Query
+
 """
 test_pyscholar
 ----------------------------------
@@ -39,3 +41,9 @@ def test_command_line_interface():
     help_result = runner.invoke(cli.main, ['--help'])
     assert help_result.exit_code == 0
     assert '--help  Show this message and exit.' in help_result.output
+
+
+def test_query_build():
+    q = Query(authors=['page', 'brin'], words=['pagerank'],
+              phrase='bringing order to the web')
+    assert q.build() == 'https://scholar.google.it/scholar?as_oq=&lookup=0&as_sauthors=page+brin&hl=en&as_q=pagerank&as_eq=&as_vis=&as_epq=bringing+order+to+the+web'
