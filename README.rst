@@ -17,6 +17,9 @@ pyscholar
      :target: https://pyup.io/repos/github/Neuro17/pyscholar/
      :alt: Updates
 
+.. image:: https://landscape.io/github/Neuro17/pyscholar/master/landscape.svg?style=flat-square
+   :target: https://landscape.io/github/Neuro17/pyscholar/master
+   :alt: Code Health
 
 A simple crawler for google scholar
 
