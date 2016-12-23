@@ -17,6 +17,8 @@ SCHOLAR = 'scholar'
 LANGUAGE = 'en'
 QUERY = 'map reduce'
 
+params = {'hl': LANGUAGE,
+          'q': urllib.quote_plus(QUERY)}
 
 # params = {'hl': LANGUAGE,
 #           'q': urllib.quote_plus(QUERY)}
@@ -44,11 +46,16 @@ def parse_scholar_page(page):
     for record in records:
         parse_scholar_record(record)
 
+    #--------------------------------------------------------------------------#
+    #             article               |                  PDF                 #
+    #                                   |                                      #
+    #--------------------------------------------------------------------------#
 
 def parse_scholar_record(record):
     article = record.select('div.gs_ri')[0]
     title_info = article.select('h3.gs_rt a')
     if title_info:
+
         title = title_info[0].text
         title_link = title_info[0].get('href')
 
@@ -72,7 +79,7 @@ def parse_scholar_record(record):
         print '#' * 80
         print
 
-
+        
 def get_url(params):
     return WEB_ROOT + params
 
