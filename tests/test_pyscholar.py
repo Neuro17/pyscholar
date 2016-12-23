@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from core.query import Query
-
 """
 test_pyscholar
 ----------------------------------
@@ -17,6 +15,8 @@ from click.testing import CliRunner
 
 from pyscholar import pyscholar
 from pyscholar import cli
+
+from pyscholar import Query, Crawler
 
 
 @pytest.fixture
@@ -43,7 +43,10 @@ def test_command_line_interface():
     assert '--help  Show this message and exit.' in help_result.output
 
 
-def test_query_build():
-    q = Query(authors=['page', 'brin'], words=['pagerank'],
-              phrase='bringing order to the web')
-    assert q.build() == 'https://scholar.google.it/scholar?as_oq=&lookup=0&as_sauthors=page+brin&hl=en&as_q=pagerank&as_eq=&as_vis=&as_epq=bringing+order+to+the+web'
+def test_crawler():
+    q = Query(words='mesos')
+    print q.build()
+    c = Crawler(q, pages=1)
+    c.explore_pages()
+    paper = c.articles[0]
+    assert paper.title == 'Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center.'
