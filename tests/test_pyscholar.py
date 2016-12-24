@@ -16,6 +16,8 @@ from click.testing import CliRunner
 from pyscholar import pyscholar
 from pyscholar import cli
 
+from pyscholar import Query, Crawler
+
 
 @pytest.fixture
 def response():
@@ -39,3 +41,12 @@ def test_command_line_interface():
     help_result = runner.invoke(cli.main, ['--help'])
     assert help_result.exit_code == 0
     assert '--help  Show this message and exit.' in help_result.output
+
+
+def test_crawler():
+    q = Query(words='mesos')
+    print q.build()
+    c = Crawler(q, pages=1)
+    c.explore_pages()
+    paper = c.articles[0]
+    assert paper.title == 'Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center.'
